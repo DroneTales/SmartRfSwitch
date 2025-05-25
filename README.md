@@ -3,6 +3,14 @@
  **Required Hardware**
  - 433Mhz RF switch and relay set
  - ESP32C4FN Super Mini
+ - 2N3904 transistor (2pcs)
+ - NEC2561 optocouple (2pcs)
+ - Push button
+ - 1K resistor (4 pcs)
+ - 10K resistor (3 pcs)
+ - 150 resistor
+ - 330 resistor
+ - External 5V power supply
  
  **Required Arduino Libraries**
  - esp32 by Espressif Systems (board) 3.2.0
