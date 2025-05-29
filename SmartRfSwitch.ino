@@ -37,17 +37,14 @@
 bool LampState = false;
 bool CurrentLampState = false;
 
-struct RfSwitchingLamp : Service::LightBulb
-{
+struct RfSwitchingLamp : Service::LightBulb {
     SpanCharacteristic* FPower;
     
-    RfSwitchingLamp() : Service::LightBulb()
-    {
+    RfSwitchingLamp() : Service::LightBulb() {
         FPower = new Characteristic::On();
     }
     
-    bool update()
-    {
+    bool update() {
         LampState = FPower->getNewVal();
         CurrentLampState = LampState;
         digitalWrite(SWITCH_CONTROL_PIN, LampState);
@@ -63,14 +60,12 @@ struct RfSwitchingLamp : Service::LightBulb
 
 RfSwitchingLamp* Lamp;
 
-void IRAM_ATTR SwitchSignalInterrupt()
-{
+void IRAM_ATTR SwitchSignalInterrupt() {
     LampState = !LampState;
 }
 
 // Arduino initialization routine.
-void setup()
-{
+void setup() {
     // Initialize debug serial port.
     Serial.begin(115200);
 
@@ -110,10 +105,8 @@ void setup()
 }
 
 // Arduino main loop.
-void loop()
-{
-    if (CurrentLampState != LampState)
-    {
+void loop() {
+    if (CurrentLampState != LampState) {
         CurrentLampState = LampState;
         Lamp->FPower->setVal(CurrentLampState);
         digitalWrite(SWITCH_CONTROL_PIN, LampState ? HIGH : LOW);
