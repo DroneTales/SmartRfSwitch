@@ -31,7 +31,7 @@
  - Zigbee Mode: Disabled
  - Programmer: Esptool
 
-This repository contains firmware for the HomeKit device described in [this video](https://youtu.be/C4awq37Im1w).
+This repository contains firmware for the HomeKit device described in [this video](https://youtu.be/C4awq37Im1w).  
 [Article](https://boosty.to/drone_tales/posts/d840bf25-aa16-4bdf-92cc-8fc180fbdb59?share=post_link) about RF Switch.
 
   **Support the project**
