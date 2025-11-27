@@ -50,7 +50,7 @@ struct RfSwitchingLamp : Service::LightBulb
     {
         LampState = FPower->getNewVal();
         CurrentLampState = LampState;
-        digitalWrite(SWITCH_CONTROL_PIN, LampState);
+        digitalWrite(SWITCH_CONTROL_PIN, LampState ? HIGH : LOW);
         return true;
     }
 };
@@ -88,7 +88,7 @@ void setup()
     // Initialize HomeSpan.
     homeSpan.setControlPin(CONTROL_PIN);
     homeSpan.setStatusPin(STATUS_LED_PIN);
-    homeSpan.setPairingCode("63105322");
+    homeSpan.setPairingCode("63145322");
     homeSpan.begin(Category::Lighting, "DroneTales RF Switching Lamp");
 
     // Build device's serial number.
