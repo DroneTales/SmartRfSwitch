@@ -89,6 +89,9 @@ void setup()
     homeSpan.setControlPin(CONTROL_PIN);
     homeSpan.setStatusPin(STATUS_LED_PIN);
     homeSpan.setPairingCode("63145322");
+    // Enable OTA. The default OTA password is "homespan-ota"
+    homeSpan.enableOTA();
+    // Start HomeSpan.
     homeSpan.begin(Category::Lighting, "DroneTales RF Switching Lamp");
 
     // Build device's serial number.
