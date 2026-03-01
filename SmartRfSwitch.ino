@@ -34,7 +34,7 @@
 /**************************************************************************************/
 /*                                  HomeSpan sensors                                  */
 
-bool LampState = false;
+volatile bool LampState = false;
 bool CurrentLampState = false;
 
 struct RfSwitchingLamp : Service::LightBulb
