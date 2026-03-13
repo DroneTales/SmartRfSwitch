@@ -2,7 +2,7 @@
 
  **Required Hardware**
  - 433Mhz RF switch and relay set
- - ESP32C4FN Super Mini
+ - ESP32C3FN4 Super Mini
  - 2N3904 transistor (2pcs)
  - NEC2561 optocouple (2pcs)
  - Push button
