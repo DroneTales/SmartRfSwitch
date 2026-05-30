@@ -1,11 +1,11 @@
 # Smart RF switch for Apple Home
 
-In this repository you will find a firmware and a schematic to build your own smart RF switch for your Apple Home. Should you have any questions please do not hesitate to contact me at gully.horror0w@icloud.com.
+In this repository you will find a firmware and a schematic to build your own smart RF switch for your Apple Home. Should you have any questions please do not hesitate to contact me at gully.horror0w@icloud.com.  
 
 **Required components**
 
-- RF switch and relay set
-- ESP32C3FN4 Super Mini
+- RF switch and relay set - 1 pcs.
+- ESP32C3FN4 Super Mini - 1 pcs
 - Transistor 2N3904 - 2 pcs.
 - Optocouple NEC2561 - 2 pcs.
 - Button - 1 pcs.
@@ -13,7 +13,7 @@ In this repository you will find a firmware and a schematic to build your own sm
 - Resistor 10K - 3 pcs.
 - Resistor 150 Ohm - 1 pcs.
 - Resistor 330 Ohm  1 pcs.
-- 5V 1A power supply.
+- 5V 1A power supply - 1 pcs.
  
 **Required Arduino libraries**
 
