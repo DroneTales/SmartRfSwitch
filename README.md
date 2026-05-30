@@ -1,28 +1,26 @@
-# Умный беспроводной выключатель для Apple Home
+# Smart RF switch for Apple Home
 
-Этот репозиторий содержит прошивку и схемы для умного беспроводного выключателя для Apple Home, о котором рассказывается в [этом видео](https://youtu.be/C4awq37Im1w).  
+In this repository you will find a firmware and a schematic to build your own smart RF switch for your Apple Home. Should you have any questions please do not hesitate to contact me at gully.horror0w@icloud.com.
 
-[Статья на Boosty](https://boosty.to/drone_tales/posts/d840bf25-aa16-4bdf-92cc-8fc180fbdb59?share=post_link) о переделке китайского беспроводного выключателя в умный.
+**Required components**
 
-**Используемые компоненты**
-
-- Комплект из бепроводного выключателя и реле
+- RF switch and relay set
 - ESP32C3FN4 Super Mini
-- Транзистор 2N3904 - 2 шт.
-- Оптопара NEC2561 - 2 шт.
-- Кнопка
-- Резистор 1K  - 4 шт.
-- Резистор 10K - 3 шт.
-- Резистор 150Ом
-- Рещистор 330Ом
-- Внешний источник питания на 5V 1A
+- Transistor 2N3904 - 2 pcs.
+- Optocouple NEC2561 - 2 pcs.
+- Button - 1 pcs.
+- Resistor 1K  - 4 pcs.
+- Resistor 10K - 3 pcs.
+- Resistor 150 Ohm - 1 pcs.
+- Resistor 330 Ohm  1 pcs.
+- 5V 1A power supply.
  
-**Используемые библиотеки Arduino**
+**Required Arduino libraries**
 
 - esp32 by Espressif Systems (board) 3.3.7
 - HomeSpan 2.1.7
  
-**Настройки Arduino IDE**
+**Arduino IDE settings**
 
 - Board: ESP32C3 Dev BModule
 - ESP CDC On Boot: Enabled
@@ -38,9 +36,9 @@
 - Zigbee Mode: Disabled
 - Programmer: Esptool
 
-**Поддержать автора**
+## Support the author
 
-Если вам интересно то, что я делаю, вы можете помочь выходу новых видео, поддержав меня любым удобным вам способом по ссылкам ниже:
+If you like what I am doing you can support me using one of the link below:
 
 **BuyMeACoffee**: https://buymeacoffee.com/dronetales  
 **Boosty**: https://boosty.to/drone_tales/donate  
