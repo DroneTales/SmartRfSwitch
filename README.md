@@ -1,26 +1,26 @@
-# Умный беспородной выключатель для Apple Home
+# Smart Wireless Switch for Apple Home
 
-Здесь вы найдете прошивку и схему умного беспроводного выключателя для Apple Home. По любым вопросам добро пожаловать в мой [телеграм канале](t.me/drone_tales).  
+Here you will find the firmware and schematic of a smart wireless switch for Apple Home. For any questions, welcome to my [Telegram channel](t.me/drone_tales).
 
-**Используемые компоненты**
+**Components used**
 
-- Беспроводно выключатель и реле - 1 шт.
-- ESP32C3FN4 Super Mini - 1 шт.
-- Транзистор 2N3904 - 2 шт.
-- Оптопара NEC2561 - 2 шт.
-- Кнопка - 1 шт.
-- Резистор 1K  - 4 шт.
-- Резистор 10K - 3 шт.
-- Резистор 150 Ohm - 1 шт.
-- Резистор 330 Ohm  1 шт.
-- Блок питания на 5V 1A - 1 шт.
- 
-**Используемые библиотеки Arduino**
+- Wireless switch and relay - 1 pc.
+- ESP32C3FN4 Super Mini - 1 pc.
+- 2N3904 transistor - 2 pcs.
+- NEC2561 optocoupler - 2 pcs.
+- Button - 1 pc.
+- 1K resistor - 4 pcs.
+- 10K resistor - 3 pcs.
+- 150 Ohm resistor - 1 pc.
+- 330 Ohm resistor - 1 pc.
+- 5V 1A power supply - 1 pc.
+
+**Arduino libraries used**
 
 - esp32 by Espressif Systems (board) 3.3.7
 - HomeSpan 2.1.7
- 
-**Настройки IDE**
+
+**IDE settings**
 
 - Board: ESP32C3 Dev BModule
 - ESP CDC On Boot: Enabled
@@ -36,67 +36,74 @@
 - Zigbee Mode: Disabled
 - Programmer: Esptool
 
-## Введение
+## Introduction
 
-Умные лампочки, умные реле и прочие "умные" устройства в доме — это круто. Но! Как всегда есть это чертово "но". В 3 часа ночи, когда все спят, кричать "Привет, Сири! Включи свет на кухне" не самая хорошая идея. Ну и постоянно тянутся к смартфону для того, что бы что-то включить или выключить тоже. Можно, конечно, понаставить датчиков движения, но и с ними есть нюансы. Так что без выключателей ну никак не обойтись.  
+Smart light bulbs, smart relays, and other "smart" devices in the house are cool. But! As always, there is that damn "but". At 3 a.m., when everyone is asleep, shouting "Hey Siri! Turn on the kitchen light" is not the best idea. And constantly reaching for a smartphone to turn something on or off is also not great. You could, of course, install motion sensors, but there are nuances with them too. So you can't do without switches.
 
-Первым естественным порывом было купить выключатель, совместимый с моей системой умного дома (а у меня, напомню, Apple Home). Посмотрел, что есть в продаже. Во-первых, большинство от китайцев и требовали своего приложения которое каким-то хитрым образом что-то там куда-то пробрасывали. Во-вторых, что совсем печально, большинству требовалась подготовленная проводка либо ZigBee шлюз, либо и то и другое. В общем вариант отпал по нескольким причинам.  
+The first natural impulse was to buy a switch compatible with my smart home system (which, as a reminder, is Apple Home). I looked at what was on the market. Firstly, most were from the Chinese and required their own app that somehow cleverly bridged something somewhere. Secondly, and quite sadly, most required pre-installed wiring or a ZigBee gateway, or both. So that option fell through for several reasons.
 
-Второй мыслью (которая приходит опосля) была мысль о покупке вообще любого выключателя и проброска его в Apple Home через HomerBridge. Эта идея снова уперлась в ZigBee хабы и проводку.  
+The second thought (which comes afterwards) was to buy any switch at all and bridge it to Apple Home via HomeBridge. This idea again hit a wall with ZigBee hubs and wiring.
 
-Плюнув на всю эту ерунду и пораскинув мозгами (нет, не в том смысле, не по квартире) я вдруг вспомнил, что я же вроде программист. Что нам стоит запилить выключатель самим? Да ничего. Берем радиореле и пилим. Застопорился я тогда на том, что мне жутко лень было печатать нормальную кнопку выключателя. На этом идея была отложена в не очень долгий, но все таки ящик.  
+After spitting on all this nonsense and racking my brains (no, not in that sense, not around the apartment), I suddenly remembered that I am, after all, a programmer. What's to stop us from building a switch ourselves? Nothing. We take a radio relay and build it. I got stuck back then because I was terribly lazy to print a proper switch button. So the idea was shelved in a not very long, but still, box.
 
-И вот, не так давно, искал я что-то на Ozon и решил посмотреть, что там есть в сфере технологий умных выключателей. И нашел классную штуку: полноразмерный выключатель с реле на 433Мгц. И главное, что этот выключатель (сама кнопка) работает от батарейки, а реле подключается к проводам люстры (ну или лампочки). Таким образом специальная проводка для него не нужна.  
+And so, not long ago, I was looking for something on Ozon and decided to check out what was available in the smart switch technology space. And I found a cool thing: a full-size switch with a 433 MHz relay. And the main thing is that this switch (the button itself) runs on a battery, and the relay connects to the wires of the chandelier (or light bulb). Thus, no special wiring is needed for it.
 
-*Сразу уточню: под "специальной проводкой" я имею в виду вывод фазы и нуля на выключатель света. То есть у вас к выключателю должно приходить три провода: фаза от щитка (которая разрывается), фаза на люстру и ноль от щитка. Обычно же стандартная проводка к выключателю это просто два провода: фаза от щитка и она же идет на люстру (разрыв фазы). Нуля там нет.*  
+*Let me clarify right away: by "special wiring" I mean bringing phase and neutral to the light switch. That is, you should have three wires coming to the switch: phase from the panel (which is switched), phase to the chandelier, and neutral from the panel. Usually, standard wiring to a switch is just two wires: phase from the panel and the same phase going to the chandelier (phase break). There is no neutral there.*
 
-Собственно, вот что приехало.  
+So, here is what arrived.
+
 <img width="1200" height="774" alt="4427c5d0-34c0-4a41-b96e-95a5544ea0b3" src="https://github.com/user-attachments/assets/71024160-a91a-4c7d-8ef9-c77a1872dfa5" />
 
-Дело осталось за малым: подружить этот выключатель с Apple Home. Естественно, буду для этого использовать ESP32 в связке с Arduino библиотекой HomeSpan. Благо с данной библиотекой я дружу довольно давно и у меня уже есть устройства сделанные на ее основе. Да и опыт "адаптации" радио звонка (тоже на 433) у меня уже имелся. Проблем не ожидалось.  
+The only thing left was to befriend this switch with Apple Home. Naturally, I will use an ESP32 paired with the Arduino HomeSpan library for this. Fortunately, I have been friends with this library for quite a while and already have devices built on it. I also already had experience "adapting" a radio doorbell (also 433 MHz). No problems were expected.
 
-Прежде чем курочить реле заглянул в инструкцию. И там нашел упоминание о том, что к реле можно привязать более чем одну кнопку. Интересно, подумал я, значит кнопки как-то различаются. Ну что ж, пора вскрывать это чудное устройство китайской промышленности. Кнопка меня мало интересует, обычный RF передатчик, работает и хорошо. А вот реле надо бы изучить детально. Благо корпус не заклеен, не запаян да и вообще, открывается элементарно. Вот что я добыл из этой белой коробочки.  
+Before gutting the relay, I looked at the instructions. And there I found a mention that more than one button can be paired with the relay. Interesting, I thought, so the buttons are somehow distinguished. Well then, time to open this wonderful specimen of Chinese industry. The button doesn't interest me much, it's a regular RF transmitter, it works and that's fine. But the relay should be studied in detail. Fortunately, the case is not glued, not soldered, and generally opens easily. Here is what I extracted from this white box.
+
 <img width="1200" height="1041" alt="fa4724e8-bb1b-4a3b-9f20-01ba59bede23" src="https://github.com/user-attachments/assets/cde664a8-2a51-459b-aa31-f9d86a19ea73" />
 
-В правой части платы видно бестрансформаторный (это надо взять на заметку!) источник питания, собранный на диодном мосте BD1. Какой-то микросхеме U2 (подозреваю, что это стабилизатор на сколько-то там вольт) с маркировкой IVAP302 (не нашел что это такое, кто знает — напишите в комментариях), диодах D2 и D3 и некоторой рассыпухе (конденсаторы, резисторы). Несколько элементов не обозначены и распаяны с обратной стороны платы. В частности: балластный резистор и пара сглаживающих конденсаторов. В общем ничего интересного. Единственное, что меня здесь заинтересовало — это стабилизатор. Так как он определяет напряжение питания всей остальной схемы и, как следствие, варианты согласования ее (схемы) с ESP32. Можно тупо померять выходное напряжение с источника питания, а можно потом это выяснить по косвенным признакам. На втором варианте и остановился, так как мне все равно надо выяснить "протокол" общения кнопки с реле.  
+On the right side of the board, you can see a transformerless (note that!) power supply built on a diode bridge BD1. Some IC U2 (I suspect it's a regulator for some voltage) marked IVAP302 (couldn't find what that is, if anyone knows — write in the comments), diodes D2 and D3, and some passives (capacitors, resistors). Several components are unmarked and soldered on the back side of the board. Specifically: a ballast resistor and a couple of smoothing capacitors. Nothing interesting in general. The only thing that interested me here was the regulator. Because it determines the supply voltage of the rest of the circuit and, consequently, the options for interfacing it (the circuit) with the ESP32. You could just measure the output voltage from the power supply, or you could later figure it out by indirect signs. I settled on the second option, since I still need to figure out the "protocol" of communication between the button and the relay.
 
-В левой части платы расположена сама схема управления реле, состоящая из двух микросхем U4 (наименование затерто) и U3 (маркировка FMD FT60E011A F269RKE), кое-какой рассыпухи, транзистора Q1 и, собственно, самого реле. Маркировка реле: BRD-SS-105LMF. А это говорит о том, что реле пятивольтовое. Что очень хорошо и намекает на то, что схема работает от 5 вольт. Не факт, конечно, что остальное питается от пяти вольт, так как реле включается через транзистор, но это уже что-то. Вряди там будет больше.  
+On the left side of the board is the relay control circuit itself, consisting of two ICs U4 (name erased) and U3 (marked FMD FT60E011A F269RKE), some passives, transistor Q1, and the relay itself. Relay marking: BRD-SS-105LMF. This indicates that the relay is a 5-volt one. Which is very good and hints that the circuit operates from 5 volts. It's not certain, of course, that everything else is powered by 5 volts, since the relay is switched through a transistor, but it's something. It's unlikely there will be more.
 
-Быстрый поиск в Google по FT60E011A дает нам ссылку на Data sheet из которого следует, что это простенький микроконтроллер. На это же указывает и тот факт, что к этой микросхеме (U3) подключены: кнопка, светодиод, база транзистора Q1 (через токоограничивающий резистор R3) и вторая (U4) микросхема. Следовательно, U4 — это RF чип. И принятый сигнал он передает в микроконтроллер. Сам RF чип и его обвязка меня, в данном случае, не интересует, так что описывать что там и как не буду. Там просто кучка конденсаторов в обвязке да антенна.  
+A quick Google search for FT60E011A gives us a link to a Data sheet from which it follows that it's a simple microcontroller. This is also indicated by the fact that this IC (U3) is connected to: a button, an LED, the base of transistor Q1 (through current-limiting resistor R3), and the second IC (U4). Therefore, U4 is an RF chip. And it sends the received signal to the microcontroller. The RF chip itself and its supporting circuitry do not interest me in this case, so I won't describe what's there and how. It's just a bunch of capacitors in the supporting circuitry and an antenna.
 
-*Резистор Q1 в данной схеме работает как ключ: он позволяет малым током от микроконтроллера управлять относительно большим током обмотки реле. Обычно выходы микроконтроллера рассчитаны на токи в пару десятков миллиампер. А вот само реле потребляет гораздо больший ток (может и до сотен миллиампер доходить). Микроконтроллер просто не сможет выдать такой ток на свои выходы. А если и сможет, то с большой долей вероятности просто сгорит. Для этого и применяют транзисторный ключ. Ну а диод D1 гасит обратный выброс энергии с катушки реле.*  
+*Transistor Q1 in this circuit works as a switch: it allows a small current from the microcontroller to control a relatively large current of the relay coil. Typically, microcontroller outputs are designed for currents of a couple dozen milliamps. But the relay itself consumes a much larger current (can reach hundreds of milliamps). The microcontroller simply cannot output such current on its pins. And if it could, it would most likely just burn out. That's why a transistor switch is used. And diode D1 suppresses the reverse energy surge from the relay coil.*
 
-Теперь нужно разобраться, что же конкретно RF чип передает в микроконтроллер и как микроконтроллер управляет реле. Заодно и уровни сигналов посмотрю. Пришло время потыкать туда осциллографом.  
+Now we need to figure out what exactly the RF chip transmits to the microcontroller and how the microcontroller controls the relay. At the same time, I'll look at the signal levels. It's time to poke around there with an oscilloscope.
 
-Прежде чем тыкать щупами осциллографа, надо бы решить проблему с питанием. Не очень хочется лазить в устройстве, которое на прямую питается от 220 без развязки. Решил подать питание сразу после диодного моста от лабораторного блока питания. Завелось от 12 вольт.  
+Before poking with oscilloscope probes, I should solve the power issue. I don't really want to poke around in a device that is directly powered from 220 V without isolation. I decided to supply power right after the diode bridge from a lab power supply. It started up from 12 volts.
 
-Сигнал с RF чипа на МК без команды от кнопки. Иногда проскакивает помеха. Но в основном там тихо.  
+Signal from the RF chip to the MCU without a command from the button. Sometimes there is noise. But mostly it's quiet.
+
 <img width="800" height="480" alt="a33f33ec-6ca8-4009-b592-5f8ce8f76c0d" src="https://github.com/user-attachments/assets/9afa8492-b67a-477f-aa81-d77b50be7eec" />
 
-Если же нажать кнопку то RF чип начинает передавать что-то в микроконтроллер. Я так подозреваю – код кнопки.  
+If you press the button, the RF chip starts transmitting something to the microcontroller. I suspect it's the button code.
+
 <img width="800" height="480" alt="d95c067e-4795-40ff-b891-c672eb240a08" src="https://github.com/user-attachments/assets/5a73dc86-0c78-4c6d-baad-56f24bb49a33" />
 
-На скриншот не все попало, но там довольно длинная последовательность. Сразу видно, что сигнал имеет уровень 5 вольт, что очень и очень хорошо. Ну и реле пятивольтовое, как я упоминал выше. Так что с согласованием уровней проблем не будет.  
+Not everything fit in the screenshot, but there is a fairly long sequence. It's immediately clear that the signal has a level of 5 volts, which is very, very good. And the relay is 5-volt, as I mentioned above. So there will be no problems with level matching.
 
-Заниматься декодирование и эмуляцией сигнала мне не очень хотелось, по этому посмотрел еще и сигнал на управление реле (на R3 со стороны микроконтроллера). Осциллограмму приводить не буду — там все ожидаемо. Либо постоянно высокий уровень (5 вольт) когда реле включается (замыкает выходные контакты). Либо постоянно низкий, если выход разомкнут.  
+I didn't really want to get into decoding and emulating the signal, so I also looked at the relay control signal (on R3 from the microcontroller side). I won't show the oscillogram — everything is as expected. Either a constant high level (5 volts) when the relay turns on (closes the output contacts). Or a constant low level if the output is open.
 
-В общем принимаю решение подключаться в разрыв между микроконтроллером и Q1. Для этого нужно будет выпаять резистор R3. Набросал вот такую схему подключения.  
+In general, I decided to connect in the break between the microcontroller and Q1. To do this, I will need to unsolder resistor R3. I sketched out the following connection diagram.
+
 <img width="1200" height="494" alt="5dbec0c2-6881-4383-bcb6-f2fc6c171803" src="https://github.com/user-attachments/assets/923502a1-b7ec-4e81-9c78-a542090c3793" />
 
-По схеме все очень просто. Опторазвязка от реле (так как помню, что там бестрансформаторный источник питания, который не имеет гальванической развязки с сетью 220 вольт). Switch Signal припаивается к выходу микроконтроллера, который идет на верхний контакт R3. Relay switch — к нижнему выводу резистора R3 (который выпаивается), на базу транзистора Q1. Ну а землю к любой точке "-" на плате реле. Там как раз есть очень удобная рядом с R2. BTN+ и BTN- — сюда можно подключить внешнюю кнопку для управления ESP32 (за деталями к справке по HomeSpan). BTN LED+ и BTN LED- — к индикаторному светодиоду. У меня кнопка со встроенным светодиодом, что очень удобно. Опять же — за деталями к справке по HomeSpan.  
+The diagram is very simple. Opto-isolation from the relay (since I remember that there is a transformerless power supply there, which does not have galvanic isolation from the 220 V mains). Switch Signal is soldered to the microcontroller output that goes to the top contact of R3. Relay switch — to the bottom lead of resistor R3 (which is unsoldered), to the base of transistor Q1. And ground to any "-" point on the relay board. There is a very convenient one right next to R2. BTN+ and BTN- — you can connect an external button here to control the ESP32 (for details, refer to the HomeSpan documentation). BTN LED+ and BTN LED- — to the indicator LED. I have a button with a built-in LED, which is very convenient. Again — for details, refer to the HomeSpan documentation.
+
 <img width="1200" height="1041" alt="e9042f05-5a32-4acc-851c-255e513fc7ad" src="https://github.com/user-attachments/assets/9198605e-8f63-4c32-ba86-7cc467757a48" />
 
-Осталась только одна проблема — питание ESP32. Изначальная идея запитать все от одного блока питания на 5 вольт пока провалилась, так как стабилизатор запускается только от 12 (точнее, схема питания запускается от 12, стабилизатор скорее всего запустится бы и от 6). Можно, конечно, подать питание напрямую, обойдя всю схему питания, но, честно говоря, не хотелось выпаивать кучу деталей. Хотелось оставить возможность быстро вернуть реле в исходное состояние.  
+There is only one problem left — powering the ESP32. The initial idea to power everything from a single 5-volt power supply has so far failed, since the regulator only starts from 12 (more precisely, the power circuit starts from 12, the regulator would probably start from 6 as well). You could, of course, supply power directly, bypassing the entire power circuit, but honestly, I didn't want to unsolder a bunch of components. I wanted to keep the ability to quickly return the relay to its original state.
 
-*Если же вдруг вам захочется запитать реле от своего блока питания, то 12 вольт нужно подавать на выходные (верхние на фото) контакты диодного моста (BD1). Левый — "+", правый — "-". Диодный мост обязательно выпаять! Схема потребляет менее 100 миллиампер при питании от 12 вольт.*  
+*If you ever want to power the relay from your own power supply, then 12 volts should be applied to the output (top in the photo) contacts of the diode bridge (BD1). Left is "+", right is "-". The diode bridge must be unsoldered! The circuit consumes less than 100 milliamps when powered from 12 volts.*
 
-В общем я решил оставить питание реле как оно есть, а для питания ESP32 использовать отдельный блок питания на 5 вольт. Таким образом, мне нужно будет всего лишь удалить резистор R3 и припаять три провода.  
+In general, I decided to leave the relay power as it is, and use a separate 5-volt power supply for the ESP32. Thus, I only need to remove resistor R3 and solder three wires.
 
-Важный момент! Необходимо, чтобы используемый блок питания был полностью гальванически развязан с сетью 220. Иначе весь белый дым выйдет очень быстро. К счастью, такой БП у меня есть.  
+Important point! The power supply used must be fully galvanically isolated from the 220 V mains. Otherwise, all the white smoke will come out very quickly. Fortunately, I have such a power supply.
 
-В общем, все продумано — паяем. Не сильно парился с разводкой платы. Потом распечатал коробочку, подключил кнопку. Вот все в сборе.  
+So, everything is thought out — let's solder. I didn't bother much with the board layout. Then I printed a small box, connected the button. Here is everything assembled.
+
 <img width="1200" height="636" alt="b05cdded-5379-4e8e-be72-37bb3e436af2" src="https://github.com/user-attachments/assets/4875408d-8865-4866-8cbd-5699a69b8152" />
 
-С электрикой и электроникой разобрался. Пора прошивку готовить. Ну с этим особых проблем нет. Логика довольно простая: так как управляющий сигнал имеет логический уровень и постоянен для данного состояния (всегда 5В если реле включено и всегда 0В если реле выключено), то оптимальным решением будет использование прерывания по изменению уровня сигнала. Не важно, что МК реле выдает на выход. Важно, когда этот сигнал изменится. По изменению сигнала можно определить, что кнопка была нажата. А что в реальности нужно сделать с реле (включить или выключить) зависит исключительно от внутреннего состояния прошивки ESP32. Это позволяет управлять реле независимо от текущего состояния управляющего сигнала как кнопкой, так и из Apple Home.  
+I've dealt with the electrical and electronic parts. Time to prepare the firmware. Well, there are no special problems with that. The logic is quite simple: since the control signal has a logic level and is constant for a given state (always 5V if the relay is on and always 0V if the relay is off), the optimal solution is to use an interrupt on signal level change. It doesn't matter what the relay MCU outputs. What matters is when this signal changes. By the signal change, you can determine that the button was pressed. And what actually needs to be done with the relay (turn on or off) depends solely on the internal state of the ESP32 firmware. This allows controlling the relay independently of the current state of the control signal, both by the button and from Apple Home.
 
-Ну вот, в общем-то, и весь сказ. Выключатель работает. В Apple Home добавился. Свободное время на праздниках убито. Все цели достигнуты, как говорится. Если есть какие вопросы — милости прошу в [телеграм канале](t.me/drone_tales).
+Well, that's basically the whole story. The switch works. It was added to Apple Home. Free time during the holidays was killed. All goals achieved, as they say. If you have any questions — you are welcome to my [Telegram channel](t.me/drone_tales).
